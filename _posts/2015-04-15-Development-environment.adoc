@@ -1,4 +1,5 @@
 = Development environment
+:tags: dev
 
 == Install node.js
 
