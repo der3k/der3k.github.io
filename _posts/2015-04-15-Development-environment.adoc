@@ -2,7 +2,7 @@
 :tags: dev
 
 == Install node.js
-
+{tags}
 
 == Install Ember CLI
 
