@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Event driven processing pipeline</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="//der3k.github.io/themes/Casper/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="//der3k.github.io/themes/Casper/assets/css/screen.css?v=1.0.0" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+
+    <link rel="canonical" href="https://der3k.github.io/2015/06/19/Event-driven-processing-pipeline.html" />
+    
+    <meta property="og:site_name" content="" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Event driven processing pipeline" />
+    <meta property="og:description" content="use relational database to store events store domain events only events form transactions (transaction has a time stamp) event processing pipelines should be based only on the events table in the case events happen outside domain dedicate independent process that..." />
+    <meta property="og:url" content="https://der3k.github.io/2015/06/19/Event-driven-processing-pipeline.html" />
+    <meta property="article:published_time" content="2015-06-18T22:00:00.000Z" />
+    <meta property="article:modified_time" content="2015-06-19T06:17:05.557Z" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Event driven processing pipeline" />
+    <meta name="twitter:description" content="use relational database to store events store domain events only events form transactions (transaction has a time stamp) event processing pipelines should be based only on the events table in the case events happen outside domain dedicate independent process that..." />
+    <meta name="twitter:url" content="https://der3k.github.io/2015/06/19/Event-driven-processing-pipeline.html" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "",
+    "author": {
+        "@type": "Person",
+        "image": "https://avatars.githubusercontent.com/u/14407?v=3",
+        "url": "undefined/author/undefined"
+    },
+    "headline": "Event driven processing pipeline",
+    "url": "https://der3k.github.io/2015/06/19/Event-driven-processing-pipeline.html",
+    "datePublished": "2015-06-18T22:00:00.000Z",
+    "dateModified": "2015-06-19T06:17:05.557Z",
+    "description": "use relational database to store events store domain events only events form transactions (transaction has a time stamp) event processing pipelines should be based only on the events table in the case events happen outside domain dedicate independent process that..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost ?" />
+    <link rel="alternate" type="application/rss+xml" title="" href="https://der3k.github.io/rss" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+</head>
+<body class="post-template">
+
+    
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="https://der3k.github.io">Home</a>
+        <!-- <a class="subscribe-button icon-feed" href="https://der3k.github.io/rss/">Subscribe</a> -->
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Event driven processing pipeline</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-06-19">19 June 2015</time> 
+            </section>
+        </header>
+
+        <section class="post-content">
+            <div class="ulist">
+<ul>
+<li>
+<p>use relational database to store events</p>
+</li>
+<li>
+<p>store domain events only</p>
+</li>
+<li>
+<p>events form transactions (transaction has a time stamp)</p>
+</li>
+<li>
+<p>event processing pipelines should be based only on the events table</p>
+</li>
+<li>
+<p>in the case events happen outside domain dedicate independent process that would detect those events and publish them to the event stream (do not attach any other actions to it, e.g., synchronization, emails sending&#8230;&#8203; leave it to independent events processing worker)</p>
+</li>
+<li>
+<p>event processing pipeline (worker) subscribes to the event stream and creates work items from events in the form of <strong>files</strong>, this would enable retries and simpler error handling</p>
+</li>
+<li>
+<p>another process watches the folder for work item files and handles them one by one</p>
+</li>
+<li>
+<p>in case of error, work item file is moved to the error folder from where it can be easily retried by just moving it back to the input folder (queue)</p>
+</li>
+</ul>
+</div>
+        </section>
+
+        <footer class="post-footer">
+
+
+            <figure class="author-image">
+                <a class="img" href="" style="background-image: url(https://avatars.githubusercontent.com/u/14407?v=3)"><span class="hidden">'s Picture</span></a>
+            </figure>
+
+            <section class="author">
+                <h4><a href=""></a></h4>
+
+                    <p>Read <a href="">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/share?text=Event%20driven%20processing%20pipeline&amp;url=https://der3k.github.io/2015/06/19/Event-driven-processing-pipeline.html"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://der3k.github.io/2015/06/19/Event-driven-processing-pipeline.html"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://der3k.github.io/2015/06/19/Event-driven-processing-pipeline.html"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+
+    </article>
+
+</main>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="https://der3k.github.io"></a> &copy; 2015</section>
+        <section class="poweredby">Proudly published with <a href="http://hubpress.io">HubPress</a></section>
+    </footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js?v="></script> 
+      <script type="text/javascript">
+        jQuery( document ).ready(function() {
+          // change date with ago
+          jQuery('ago.ago').each(function(){
+            var element = jQuery(this).parent();
+            element.html( moment(element.text()).fromNow());
+          });
+        });
+
+        hljs.initHighlightingOnLoad();      
+      </script>
+
+    <script type="text/javascript" src="//der3k.github.io/themes/Casper/assets/js/jquery.fitvids.js?v=1.0.0"></script>
+    <script type="text/javascript" src="//der3k.github.io/themes/Casper/assets/js/index.js?v=1.0.0"></script>
+
+</body>
+</html>
