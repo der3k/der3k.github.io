@@ -1,0 +1,7 @@
+= Command driven task execution
+
+* store commands in relational database
+* commands have order time stamp and execution time stamp
+* execution timestamp anables postponed commands (you can order it now but it would be executed later)
+* result of command execution are series of events stored in a single transaction
+* events would have back reference to command id
