@@ -1,0 +1,11 @@
+= Event driven processing pipeline
+
+* use relational database to store events
+* store domain events only
+* events form transactions (transaction has a time stamp)
+* event processing pipelines should be based only on the events table
+* in the case events happen outside domain dedicate independent process that would detect those events and publish them to the event stream (do not attach any other actions to it, e.g., synchronization, emails sending... leave it to independent events processing worker)
+* event processing pipeline (worker) subscribes to the event stream and creates work items from events in the form of *files*, this would enable retries and simpler error handling
+* another process watches the folder for work item files and handles them one by one
+* in case of error, work item file is moved to the error folder from where it can be easily retried by just moving it back to the input folder (queue)
+
